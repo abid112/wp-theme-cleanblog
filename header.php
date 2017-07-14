@@ -56,3 +56,5 @@
         </div>
         <!-- /.container -->
     </nav>
+    <?php wp_footer(); ?>
+    </body>

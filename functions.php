@@ -58,5 +58,20 @@ $defaults = array(
 
 add_theme_support( 'custom-header', $defaults );
 
+#Footer-->
+function footersidebar(){
+  		register_sidebar(array(
+
+  			'name'=>'Copyright Information',
+  			'id'=>'footer_sidebar1',
+  			'before_widget'=>' ',
+  			'after_widget'=>'',
+  			'description'=>'Drag and Drop Text Field from Left Side and Add your Copyright Text',
+  			));
+
+  	}
+
+  	add_action('widgets_init','footersidebar');
+
 
 ?>

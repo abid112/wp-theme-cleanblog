@@ -29,7 +29,7 @@
                             </a>
                         </li>
                     </ul>
-                    <p class="copyright text-muted">Copyright &copy; Your Website 2016</p>
+                    <p class="copyright text-muted"> <center><?php dynamic_sidebar('footer_sidebar1'); ?></center>  </p>
                 </div>
             </div>
         </div>

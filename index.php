@@ -31,11 +31,12 @@
                             <?php the_excerpt(); ?>
                         </h3>
                     </a>
-                    <p class="post-meta">Posted by <?php the_time ('M-d-Y'); ?> <?php the_time(); ?></p>
+                    <p class="post-meta">Posted by <?php the_author() ?> on <?php the_time ('F-j-Y'); ?> </p>
+                    <?php endwhile; ?>
                 </div>
                 <hr>
                 
-                <?php endwhile; ?>
+                
                 <hr>
                 <!-- Pager -->
                 <ul class="pager">

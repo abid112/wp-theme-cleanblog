@@ -54,24 +54,24 @@ add_action( 'wp_enqueue_scripts', 'cleanblog_style' );
 $defaults = array(
 	'default-image'  => get_template_directory_uri().'/img/home-bg.jpg',
 	
-);
+	);
 
 add_theme_support( 'custom-header', $defaults );
 
 #Footer-->
 function footersidebar(){
-  		register_sidebar(array(
+	register_sidebar(array(
 
-  			'name'=>'Copyright Information',
-  			'id'=>'footer_sidebar1',
-  			'before_widget'=>' ',
-  			'after_widget'=>'',
-  			'description'=>'Drag and Drop Text Field from Left Side and Add your Copyright Text',
-  			));
+		'name'=>'Copyright Information',
+		'id'=>'footer_sidebar1',
+		'before_widget'=>' ',
+		'after_widget'=>'',
+		'description'=>'Drag and Drop Text Field from Left Side and Add your Copyright Text',
+		));
 
-  	}
+}
 
-  	add_action('widgets_init','footersidebar');
+add_action('widgets_init','footersidebar');
 
 
 ?>

@@ -405,3 +405,6 @@ img::-moz-selection {
 body {
   -webkit-tap-highlight-color: #0085A1;
 }
+.menu{
+  list-style: none;
+}

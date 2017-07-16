@@ -32,21 +32,31 @@
                         <span class="sr-only">Toggle navigation</span>
                         Menu <i class="fa fa-bars"></i>
                     </button>
-                    <a class="navbar-brand" href="index.html">Start Bootstrap</a>
-                </div>
 
-                <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                  
-                    <?php wp_nav_menu(array(
-                        'theme_location'=>'mainmenubar',
-                        'menu_class'=>'nav navbar-nav navbar-right'
+                    <?php  $custom_logo_id = get_theme_mod( 'custom_logo' );
+                    $logo = wp_get_attachment_image_src( $custom_logo_id , 'full' );
+                    if ( has_custom_logo() ) {
+                       echo '<img class="navbar-brand" href="index.html" src="'. esc_url( $logo[0] ) .'">';
+                   } else {
+                    echo '<a class="navbar-brand" href="index.html">Start Bootstrap</a>';
+                } ?>
+                
 
-                        )) ?>
-                    </div>
-                    <!-- /.navbar-collapse -->
+                
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+              
+                <?php wp_nav_menu(array(
+                    'theme_location'=>'mainmenubar',
+                    'menu_class'=>'nav navbar-nav navbar-right'
+
+                    )) ?>
                 </div>
-                <!-- /.container -->
-            </nav>
-            <?php wp_footer(); ?>
-        </body>
+                <!-- /.navbar-collapse -->
+            </div>
+            <!-- /.container -->
+        </nav>
+        <?php wp_footer(); ?>
+    </body>

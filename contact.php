@@ -9,14 +9,14 @@ Template Name: Contract Us
 <?php get_header(); ?>
 
 
-<header class="intro-header" style="background-image: url(get_template_directory_uri().'/img/contact-bg.jpg')">
+<header class="intro-header" style="background-image: url('<?php echo get_template_directory_uri(); ?>/img/contact-bg.jpg')">
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 <div class="page-heading">
-                    <h1>Contact Me</h1>
-                    <hr class="small">
-                    <span class="subheading">Have questions? I have answers (maybe).</span>
+                    <h1><?php echo get_post_meta($post->ID,'page_title',true) ?></h1>
+                        <hr class="small">
+                        <span class="subheading"><?php echo get_post_meta($post->ID,'desc', true) ?></span>
                 </div>
             </div>
         </div>

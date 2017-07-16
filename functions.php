@@ -58,7 +58,7 @@ $defaults = array(
 
 add_theme_support( 'custom-header', $defaults );
 
-#Footer-->
+#Footer Widget 1-->
 function footersidebar(){
 	register_sidebar(array(
 
@@ -73,7 +73,25 @@ function footersidebar(){
 
 add_action('widgets_init','footersidebar');
 
+#Footer Widget 2---->
 
+function footersidebar2(){
+	register_sidebar(array(
+
+		'name'=>'Social Media Links',
+		'id'=>'footer_sidebar2',
+		'before_widget'=>' ',
+		'after_widget'=>'',
+		'description'=>'Drag and Drop Social Media from Left Side(Dont need to add the Title) ',
+		));
+
+}
+
+add_action('widgets_init','footersidebar2');
+
+
+
+#Custom Logo---------------->
 function themename_custom_logo_setup() {
     $defaults = array(
         'height'      => 45,
@@ -88,9 +106,33 @@ add_action( 'after_setup_theme', 'themename_custom_logo_setup' );
 
 
 
+#Add User Profile Field on Wordpress Profile---------------->
+
+function my_new_contactmethods( $contactmethods ) {
+    // Add Twitter
+    $contactmethods['twitter'] = 'Twitter';
+    //add Facebook
+    $contactmethods['facebook'] = 'Facebook';
+
+    //add Github
+    $contactmethods['github'] = 'Github';
+
+    //add Instagram
+    $contactmethods['instagram'] = 'Instagram';
+
+    //add Printerest
+    $contactmethods['pinterest'] = 'Pinterest';
+
+    //add google+
+    $contactmethods['google'] = 'Google+';
+   
 
 
-#For Adding Header Imgage and title Every Page
+    return $contactmethods;
+}
+add_filter('user_contactmethods','my_new_contactmethods',10,1);
+
+#For Adding Header Imgage and title Every Page------------------->
 
 function cd_meta_box_add()
 {
@@ -99,7 +141,9 @@ function cd_meta_box_add()
       add_meta_box( 'my-img-id', 'Images Meta Box', 'cd_meta_box_img_cb', 'page', 'normal', 'high' );
 }
 add_action( 'add_meta_boxes', 'cd_meta_box_add' );
-/*outpur value*/
+
+
+
 function cd_meta_box_cb($post)
 { 
     ?>
@@ -133,8 +177,146 @@ function cd_meta_box_img_cb()
 
 
 
-    <?php
+<?php
+
+
 }
 
 
-?>
+#Custom Widget for Social Media--------------------->
+
+
+
+      
+class social_widget extends WP_Widget {
+
+	public function __construct() {
+		$widget_options = array( 
+			'classname' => 'social_widget',
+			'description' => 'This is a Social Widget',
+			);
+		parent::__construct( 'social_widget', 'Social Widget', $widget_options );
+	}
+
+
+
+	public function widget( $args, $instance ) {
+
+		?>
+		<ul class="list-inline text-center">
+
+			<?php
+                            $walt_id = 1; 
+                            $userdata = get_user_meta( $walt_id );
+
+                            if(!empty($userdata['twitter'][0])){
+                            	?>
+                            	<li class="list-inline-item">
+                            		<a href="<?php  echo $userdata['twitter'][0]; ?>" target="_blank">
+                            			<span class="fa-stack fa-lg">
+                            				<i class="fa fa-circle fa-stack-2x"></i>
+                            				<i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            			</span>
+                            		</a>
+                            	</li>
+                            	<?php 
+                            } 
+
+                            if(!empty($userdata['facebook'][0])){
+                            	?>
+
+                            	<li class="list-inline-item">
+                            		<a href="<?php  echo $userdata['facebook'][0]; ?>" target="_blank">
+                            			<span class="fa-stack fa-lg">
+                            				<i class="fa fa-circle fa-stack-2x"></i>
+                            				<i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                            			</span>
+                            		</a>
+                            	</li>
+                            	<?php 
+                            } 
+
+                            if(!empty($userdata['github'][0])){
+                            	?>
+
+                            	<li class="list-inline-item">
+                            		<a href="<?php  echo $userdata['github'][0]; ?>" target="_blank">
+                            			<span class="fa-stack fa-lg">
+                            				<i class="fa fa-circle fa-stack-2x"></i>
+                            				<i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            			</span>
+                            		</a>
+                            	</li>
+                            	<?php 
+                            } 
+                            if(!empty($userdata['instagram'][0])){
+                            	?>
+
+                            	<li class="list-inline-item">
+                            		<a href="<?php  echo $userdata['instagram'][0]; ?>" target="_blank">
+                            			<span class="fa-stack fa-lg">
+                            				<i class="fa fa-circle fa-stack-2x"></i>
+                            				<i class="fa fa-instagram fa-stack-1x fa-inverse"></i>
+                            			</span>
+                            		</a>
+                            	</li>
+                            	<?php 
+                            } 
+
+                            if(!empty($userdata['google'][0])){
+                            	?>
+
+                            	<li class="list-inline-item">
+                            		<a href="<?php  echo $userdata['google'][0]; ?>" target="_blank">
+                            			<span class="fa-stack fa-lg">
+                            				<i class="fa fa-circle fa-stack-2x"></i>
+                            				<i class="fa fa-google-plus fa-stack-1x fa-inverse"></i>
+                            			</span>
+                            		</a>
+                            	</li>
+                            	<?php 
+                            }
+
+                            ?>
+                        </ul>
+                        <?php
+                    }
+
+
+
+                    public function form( $instance ) {
+                    	$title = ! empty( $instance['title'] ) ? $instance['title'] : '';
+                    	?>
+                    	<p>
+                    		<label for="<?php echo $this->get_field_id( 'title' ); ?>">Title:</label>
+                    		<input class="widefat" type="text" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo esc_attr( $title ); ?>" />
+
+
+
+                    	</p>
+
+
+
+                    	<?php 
+                    }     
+
+
+
+                    public function update( $new_instance, $old_instance ) {
+                    	$instance = $old_instance;
+
+                    	$instance[ 'title' ] = strip_tags( $new_instance[ 'title' ] );
+                    	return $instance;
+                    }
+                }
+
+
+
+
+
+                function register_social_widget() { 
+                	register_widget( 'social_widget' );
+                }
+                add_action( 'widgets_init', 'register_social_widget' );
+
+                ?>

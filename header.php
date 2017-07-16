@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Clean Blog</title>
+    
 
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -38,7 +38,7 @@
                     if ( has_custom_logo() ) {
                        echo '<img class="navbar-brand" href="index.html" src="'. esc_url( $logo[0] ) .'">';
                    } else {
-                    echo '<a class="navbar-brand" href="index.html">Start Bootstrap</a>';
+                    echo '<a class="navbar-brand" href="index.html">Your Logo Here</a>';
                 } ?>
                 
 

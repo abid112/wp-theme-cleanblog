@@ -35,10 +35,17 @@
 
                     <?php  $custom_logo_id = get_theme_mod( 'custom_logo' );
                     $logo = wp_get_attachment_image_src( $custom_logo_id , 'full' );
+
                     if ( has_custom_logo() ) {
-                       echo '<img class="navbar-brand" href="index.html" src="'. esc_url( $logo[0] ) .'">';
-                   } else {
-                    echo '<a class="navbar-brand" href="index.html">Your Logo Here</a>';
+
+
+                    
+
+                        echo  '<a  href="'.get_home_url().'"> <img class="navbar-brand" src="'. esc_url( $logo[0] ) .'"> </a>';
+                   } 
+
+                   else {
+                    echo '<a class="navbar-brand" href="index.php">Your Logo Here</a>';
                 } ?>
                 
 

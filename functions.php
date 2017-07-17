@@ -319,6 +319,6 @@ class social_widget extends WP_Widget {
                 }
                 add_action( 'widgets_init', 'register_social_widget' );
 
-                
+
 
                 ?>

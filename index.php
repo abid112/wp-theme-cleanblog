@@ -41,7 +41,7 @@
             <!-- Pager -->
             <ul class="pager">
                 <li class="next">
-                    <a href="#">Older Posts &rarr;</a>
+                    <?php posts_nav_link('', 'Newer Posts', 'Older Posts') ?>
                 </li>
             </ul>
         </div>

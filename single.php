@@ -1,9 +1,20 @@
 <?php get_header(); ?>
 <?php $backgroundImg = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'full' ); ?>
+  <?php 
+  if($backgroundImg==null){
 
-<!-- Page Header -->
-<!-- Set your background image for this header on the line below. -->
- <header class="intro-header" style="background: url('<?php echo $backgroundImg[0]; ?>') no-repeat 0 0/ 100% 100%;">
+        $backgroundImg = get_template_directory_uri().'/img/post-bg.jpg'; ?>
+
+        <header class="intro-header" style="background: url('<?php echo $backgroundImg; ?>') no-repeat 0 0/ 100% 100%;">
+        <?php
+  }
+else{
+    ?>
+<header class="intro-header" style="background: url('<?php echo $backgroundImg[0]; ?>') no-repeat 0 0/ 100% 100%;">
+<?php
+}
+
+  ?>
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">

@@ -138,8 +138,7 @@ function cd_meta_box_add()
 {
     add_meta_box( 'my-title-id', 'Title meta box', 'cd_meta_box_cb', 'page', 'normal', 'high' );
      add_meta_box( 'my-desc-id', 'Description Meta Box', 'cd_meta_box_desc_cb', 'page', 'normal', 'high' );
-      add_meta_box( 'my-img-id', 'Images Meta Box', 'cd_meta_box_img_cb', 'page', 'normal', 'high' );
-}
+      }
 add_action( 'add_meta_boxes', 'cd_meta_box_add' );
 
 
@@ -170,17 +169,6 @@ function des_output($post_id){
     update_post_meta($post_id,'desc',$_POST['desc']);
 }
 add_action('save_post','des_output');
-function cd_meta_box_img_cb()
-{ ?>
-
-<label>Upload Header image</label>
-
-
-
-<?php
-
-
-}
 
 
 #Custom Widget for Social Media--------------------->

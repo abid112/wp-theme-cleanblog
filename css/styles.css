@@ -408,3 +408,15 @@ body {
 .menu{
   list-style: none;
 }
+
+.children{
+  list-style: none;
+}
+
+.comment-list{
+  list-style: none;
+}
+.comments-title{
+  text-align: center;
+}
+

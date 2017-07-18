@@ -45,7 +45,7 @@
                    } 
 
                    else {
-                    echo '<a class="navbar-brand" href="index.php">Your Logo Here</a>';
+                    echo '<a class="navbar-brand" href="'.get_home_url().'">Your Logo Here</a>';
                 } ?>
                 
 

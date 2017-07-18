@@ -6,6 +6,11 @@ register_nav_menu('mainmenubar', 'Main Menu');
 register_nav_menu('footermen', 'footer Menu');
 add_theme_support('post-thumbnails');
 
+//for comments section---------->
+require get_template_directory() . "/mail/template-tags.php";
+
+
+#For Get All Styles and Java Scripts----------------------->
 
 function cleanblog_style() {
 
@@ -50,7 +55,7 @@ function cleanblog_style() {
 add_action( 'wp_enqueue_scripts', 'cleanblog_style' );
 
 
-
+#Custom Header Image and Default Header image------------------>
 $defaults = array(
 	'default-image'  => get_template_directory_uri().'/img/home-bg.jpg',
 	
@@ -58,7 +63,7 @@ $defaults = array(
 
 add_theme_support( 'custom-header', $defaults );
 
-#Footer Widget 1-->
+#Footer Widget 1------------>
 function footersidebar(){
 	register_sidebar(array(
 
@@ -73,7 +78,7 @@ function footersidebar(){
 
 add_action('widgets_init','footersidebar');
 
-#Footer Widget 2---->
+#Footer Widget 2-------------->
 
 function footersidebar2(){
 	register_sidebar(array(
@@ -93,14 +98,14 @@ add_action('widgets_init','footersidebar2');
 
 #Custom Logo---------------->
 function themename_custom_logo_setup() {
-    $defaults = array(
-        'height'      => 45,
-        'width'       => 151,
-        'flex-height' => true,
-        'flex-width'  => true,
-        'header-text' => array( 'site-title', 'site-description' ),
-    );
-    add_theme_support( 'custom-logo', $defaults );
+	$defaults = array(
+		'height'      => 45,
+		'width'       => 151,
+		'flex-height' => true,
+		'flex-width'  => true,
+		'header-text' => array( 'site-title', 'site-description' ),
+		);
+	add_theme_support( 'custom-logo', $defaults );
 }
 add_action( 'after_setup_theme', 'themename_custom_logo_setup' );
 
@@ -110,63 +115,63 @@ add_action( 'after_setup_theme', 'themename_custom_logo_setup' );
 
 function my_new_contactmethods( $contactmethods ) {
     // Add Twitter
-    $contactmethods['twitter'] = 'Twitter';
+	$contactmethods['twitter'] = 'Twitter';
     //add Facebook
-    $contactmethods['facebook'] = 'Facebook';
+	$contactmethods['facebook'] = 'Facebook';
 
     //add Github
-    $contactmethods['github'] = 'Github';
+	$contactmethods['github'] = 'Github';
 
     //add Instagram
-    $contactmethods['instagram'] = 'Instagram';
+	$contactmethods['instagram'] = 'Instagram';
 
     //add Printerest
-    $contactmethods['pinterest'] = 'Pinterest';
+	$contactmethods['pinterest'] = 'Pinterest';
 
     //add google+
-    $contactmethods['google'] = 'Google+';
-   
+	$contactmethods['google'] = 'Google+';
 
 
-    return $contactmethods;
+
+	return $contactmethods;
 }
 add_filter('user_contactmethods','my_new_contactmethods',10,1);
 
-#For Adding Header Imgage and title Every Page------------------->
+#Custom Meta Box For Adding Header Imgage and title Every Page------------------->
 
 function cd_meta_box_add()
 {
-    add_meta_box( 'my-title-id', 'Title meta box', 'cd_meta_box_cb', 'page', 'normal', 'high' );
-     add_meta_box( 'my-desc-id', 'Description Meta Box', 'cd_meta_box_desc_cb', 'page', 'normal', 'high' );
-      }
+	add_meta_box( 'my-title-id', 'Title meta box', 'cd_meta_box_cb', 'page', 'normal', 'high' );
+	add_meta_box( 'my-desc-id', 'Description Meta Box', 'cd_meta_box_desc_cb', 'page', 'normal', 'high' );
+}
 add_action( 'add_meta_boxes', 'cd_meta_box_add' );
 
 
 
 function cd_meta_box_cb($post)
 { 
-    ?>
+	?>
 
-<label for="title">Page Title</label>
-<input type="text" name="page_title" class="widefat" id="title" value="<?php echo get_post_meta($post->ID,'page_title',true) ?>"  >
-<?php
+	<label for="title">Page Title</label>
+	<input type="text" name="page_title" class="widefat" id="title" value="<?php echo get_post_meta($post->ID,'page_title',true) ?>"  >
+	<?php
 }
 /*Update value*/
 function  title_update($post_id){
-    update_post_meta($post_id,'page_title',$_POST['page_title']);
+	update_post_meta($post_id,'page_title',$_POST['page_title']);
 }
 add_action('save_post','title_update');
 function cd_meta_box_desc_cb($post)
 {
-    ?>
+	?>
 
-<label for="desc"></label>
-<input type="text" name="desc" class="widefat" value="<?php echo get_post_meta($post->ID,'desc', true) ?>"  >
-     
-<?php
+	<label for="desc"></label>
+	<input type="text" name="desc" class="widefat" value="<?php echo get_post_meta($post->ID,'desc', true) ?>"  >
+
+	<?php
 }
 function des_output($post_id){
-    update_post_meta($post_id,'desc',$_POST['desc']);
+	update_post_meta($post_id,'desc',$_POST['desc']);
 }
 add_action('save_post','des_output');
 
@@ -175,7 +180,7 @@ add_action('save_post','des_output');
 
 
 
-      
+
 class social_widget extends WP_Widget {
 
 	public function __construct() {
@@ -194,119 +199,119 @@ class social_widget extends WP_Widget {
 		<ul class="list-inline text-center">
 
 			<?php
-                            $walt_id = 1; 
-                            $userdata = get_user_meta( $walt_id );
+			$walt_id = 1; 
+			$userdata = get_user_meta( $walt_id );
 
-                            if(!empty($userdata['twitter'][0])){
-                            	?>
-                            	<li class="list-inline-item">
-                            		<a href="<?php  echo $userdata['twitter'][0]; ?>" target="_blank">
-                            			<span class="fa-stack fa-lg">
-                            				<i class="fa fa-circle fa-stack-2x"></i>
-                            				<i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
-                            			</span>
-                            		</a>
-                            	</li>
-                            	<?php 
-                            } 
+			if(!empty($userdata['twitter'][0])){
+				?>
+				<li class="list-inline-item">
+					<a href="<?php  echo $userdata['twitter'][0]; ?>" target="_blank">
+						<span class="fa-stack fa-lg">
+							<i class="fa fa-circle fa-stack-2x"></i>
+							<i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+						</span>
+					</a>
+				</li>
+				<?php 
+			} 
 
-                            if(!empty($userdata['facebook'][0])){
-                            	?>
+			if(!empty($userdata['facebook'][0])){
+				?>
 
-                            	<li class="list-inline-item">
-                            		<a href="<?php  echo $userdata['facebook'][0]; ?>" target="_blank">
-                            			<span class="fa-stack fa-lg">
-                            				<i class="fa fa-circle fa-stack-2x"></i>
-                            				<i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
-                            			</span>
-                            		</a>
-                            	</li>
-                            	<?php 
-                            } 
+				<li class="list-inline-item">
+					<a href="<?php  echo $userdata['facebook'][0]; ?>" target="_blank">
+						<span class="fa-stack fa-lg">
+							<i class="fa fa-circle fa-stack-2x"></i>
+							<i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+						</span>
+					</a>
+				</li>
+				<?php 
+			} 
 
-                            if(!empty($userdata['github'][0])){
-                            	?>
+			if(!empty($userdata['github'][0])){
+				?>
 
-                            	<li class="list-inline-item">
-                            		<a href="<?php  echo $userdata['github'][0]; ?>" target="_blank">
-                            			<span class="fa-stack fa-lg">
-                            				<i class="fa fa-circle fa-stack-2x"></i>
-                            				<i class="fa fa-github fa-stack-1x fa-inverse"></i>
-                            			</span>
-                            		</a>
-                            	</li>
-                            	<?php 
-                            } 
-                            if(!empty($userdata['instagram'][0])){
-                            	?>
+				<li class="list-inline-item">
+					<a href="<?php  echo $userdata['github'][0]; ?>" target="_blank">
+						<span class="fa-stack fa-lg">
+							<i class="fa fa-circle fa-stack-2x"></i>
+							<i class="fa fa-github fa-stack-1x fa-inverse"></i>
+						</span>
+					</a>
+				</li>
+				<?php 
+			} 
+			if(!empty($userdata['instagram'][0])){
+				?>
 
-                            	<li class="list-inline-item">
-                            		<a href="<?php  echo $userdata['instagram'][0]; ?>" target="_blank">
-                            			<span class="fa-stack fa-lg">
-                            				<i class="fa fa-circle fa-stack-2x"></i>
-                            				<i class="fa fa-instagram fa-stack-1x fa-inverse"></i>
-                            			</span>
-                            		</a>
-                            	</li>
-                            	<?php 
-                            } 
+				<li class="list-inline-item">
+					<a href="<?php  echo $userdata['instagram'][0]; ?>" target="_blank">
+						<span class="fa-stack fa-lg">
+							<i class="fa fa-circle fa-stack-2x"></i>
+							<i class="fa fa-instagram fa-stack-1x fa-inverse"></i>
+						</span>
+					</a>
+				</li>
+				<?php 
+			} 
 
-                            if(!empty($userdata['google'][0])){
-                            	?>
+			if(!empty($userdata['google'][0])){
+				?>
 
-                            	<li class="list-inline-item">
-                            		<a href="<?php  echo $userdata['google'][0]; ?>" target="_blank">
-                            			<span class="fa-stack fa-lg">
-                            				<i class="fa fa-circle fa-stack-2x"></i>
-                            				<i class="fa fa-google-plus fa-stack-1x fa-inverse"></i>
-                            			</span>
-                            		</a>
-                            	</li>
-                            	<?php 
-                            }
+				<li class="list-inline-item">
+					<a href="<?php  echo $userdata['google'][0]; ?>" target="_blank">
+						<span class="fa-stack fa-lg">
+							<i class="fa fa-circle fa-stack-2x"></i>
+							<i class="fa fa-google-plus fa-stack-1x fa-inverse"></i>
+						</span>
+					</a>
+				</li>
+				<?php 
+			}
 
-                            ?>
-                        </ul>
-                        <?php
-                    }
-
-
-
-                    public function form( $instance ) {
-                    	$title = ! empty( $instance['title'] ) ? $instance['title'] : '';
-                    	?>
-                    	<p>
-                    		<label for="<?php echo $this->get_field_id( 'title' ); ?>">Title:</label>
-                    		<input class="widefat" type="text" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo esc_attr( $title ); ?>" />
+			?>
+		</ul>
+		<?php
+	}
 
 
 
-                    	</p>
+	public function form( $instance ) {
+		$title = ! empty( $instance['title'] ) ? $instance['title'] : '';
+		?>
+		<p>
+			<label for="<?php echo $this->get_field_id( 'title' ); ?>">Title:</label>
+			<input class="widefat" type="text" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo esc_attr( $title ); ?>" />
 
 
 
-                    	<?php 
-                    }     
+		</p>
 
 
 
-                    public function update( $new_instance, $old_instance ) {
-                    	$instance = $old_instance;
-
-                    	$instance[ 'title' ] = strip_tags( $new_instance[ 'title' ] );
-                    	return $instance;
-                    }
-                }
+		<?php 
+	}     
 
 
 
+	public function update( $new_instance, $old_instance ) {
+		$instance = $old_instance;
+
+		$instance[ 'title' ] = strip_tags( $new_instance[ 'title' ] );
+		return $instance;
+	}
+}
 
 
-                function register_social_widget() { 
-                	register_widget( 'social_widget' );
-                }
-                add_action( 'widgets_init', 'register_social_widget' );
 
 
 
-                ?>
+function register_social_widget() { 
+	register_widget( 'social_widget' );
+}
+add_action( 'widgets_init', 'register_social_widget' );
+
+
+
+?>

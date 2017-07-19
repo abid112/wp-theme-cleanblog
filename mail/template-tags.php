@@ -28,34 +28,34 @@ if ( ! function_exists( 'cleanblog_comment_form' ) ) :
                     <div class="row">
                     <div class="col-md-4 comment-form-author">
                         <div class="input-field">
-                            <label for="author">' . esc_html__( '', 'bonappetit' ) . '</label>
+                            <label for="author">' . esc_html__( '', 'cleanblog' ) . '</label>
                             <input   class="form-control"  id="author" name="author" type="text" placeholder="NAME"
                             value="' . esc_attr( $commenter[ 'comment_author' ] ) . '" ' . $aria_req . ' />
                         </div>
                     </div>',
             'email'  => '<div class="col-md-4 comment-form-email">
                     <div class="input-field">
-                        <label for="email">'. esc_html__( '', 'bonappetit' ) . '</label>
+                        <label for="email">'. esc_html__( '', 'cleanblog' ) . '</label>
                         <input id="email" class="form-control" name="email" placeholder="EMAIL"' . ( $html5 ? 'type="email"' : 'type="text"' ) . '
                         value="' . esc_attr( $commenter[ 'comment_author_email' ] ) . '" ' . $aria_req . ' />
                     </div>
                 </div>',
             'url'    => '<div class="col-md-4 comment-form-url">
                     <div class="input-field">
-                        <label for="url">' . esc_html__( '', 'bonappetit' ) . '</label>
+                        <label for="url">' . esc_html__( '', 'cleanblog' ) . '</label>
                         <input  class="form-control" id="url" name="url" placeholder="WEBSITE" ' . ( $html5 ? 'type="url"' : 'type="text"' ) . ' value="' . esc_attr( $commenter[ 'comment_author_url' ] ) . '"  />
                     </div>
                 </div></div>'
         );
 
-        $required_text = sprintf( ' ' . esc_html__( 'Required fields are marked %s', 'bonappetit' ), '<span class="required">*</span>' );
+        $required_text = sprintf( ' ' . esc_html__( 'Required fields are marked %s', 'cleanblog' ), '<span class="required">*</span>' );
         $defaults      = array(
             'fields'               => apply_filters( 'comment_form_default_fields', $fields ),
             'comment_field'        => '
                 <div class="row comment-form-comment">
                     <div class="col-md-12">
                         <div class="input-field">
-                            <label for="comment">' . esc_html__( 'Comment *', 'bonappetit' ) . '</label>
+                            <label for="comment">' . esc_html__( 'Comment *', 'cleanblog' ) . '</label>
                             <textarea class="form-control" id="comment" name="comment" rows="8" aria-required="true"></textarea>
                         </div>
                     </div>
@@ -63,16 +63,16 @@ if ( ! function_exists( 'cleanblog_comment_form' ) ) :
             'must_log_in'          => '
                 <div class="alert alert-danger must-log-in">' .
 
-                sprintf( wp_kses( __( 'You must be <a href="%s">logged in</a> to post a comment.', 'bonappetit' ), array( 'a' => array( 'href' => array() ) ) ), wp_login_url( apply_filters( 'the_permalink', esc_url( get_permalink( $post_id ) ) ) ) ) . '</div>',
-            'logged_in_as'         => '<div class="alert alert-info logged-in-as">' . sprintf( wp_kses( __( 'Logged in as <a href="%1$s">%2$s</a>. <a href="%3$s" title="Log out of this account">Log out?</a>', 'bonappetit' ), array( 'a' => array( 'href' => array() ) ) ), get_edit_user_link(), $user_identity, wp_logout_url( apply_filters( 'the_permalink', esc_url( get_permalink( $post_id ) ) ) ) ) . '</div>',
+                sprintf( wp_kses( __( 'You must be <a href="%s">logged in</a> to post a comment.', 'cleanblog' ), array( 'a' => array( 'href' => array() ) ) ), wp_login_url( apply_filters( 'the_permalink', esc_url( get_permalink( $post_id ) ) ) ) ) . '</div>',
+            'logged_in_as'         => '<div class="alert alert-info logged-in-as">' . sprintf( wp_kses( __( 'Logged in as <a href="%1$s">%2$s</a>. <a href="%3$s" title="Log out of this account">Log out?</a>', 'cleanblog' ), array( 'a' => array( 'href' => array() ) ) ), get_edit_user_link(), $user_identity, wp_logout_url( apply_filters( 'the_permalink', esc_url( get_permalink( $post_id ) ) ) ) ) . '</div>',
             
         
             'id_form'              => 'commentform',
             'id_submit'            => 'submit',
-            'title_reply'          => esc_html__( 'Leave a Comment', 'bonappetit' ),
-            'title_reply_to'       => esc_html__( 'Leave a Reply to %s', 'bonappetit' ),
-            'cancel_reply_link'    => esc_html__( 'Cancel reply', 'bonappetit' ),
-            'label_submit'         => esc_html__( 'SUBMIT', 'bonappetit' ),
+            'title_reply'          => esc_html__( 'Leave a Comment', 'cleanblog' ),
+            'title_reply_to'       => esc_html__( 'Leave a Reply to %s', 'cleanblog' ),
+            'cancel_reply_link'    => esc_html__( 'Cancel reply', 'cleanblog' ),
+            'label_submit'         => esc_html__( 'SUBMIT', 'cleanblog' ),
             'format'               => 'xhtml',
         );
 
@@ -117,6 +117,7 @@ if ( ! function_exists( 'cleanblog_comment_form' ) ) :
                                    value="<?php echo esc_attr( $args[ 'label_submit' ] ); ?>"/>
                             <?php comment_id_fields( $post_id ); ?>
                         </div> 
+                        <br>
                         <?php do_action( 'comment_form', $post_id ); ?>
                     </form>
                 <?php } ?>
@@ -133,9 +134,9 @@ endif;
 // Comments list
 //----------------------------------------------------------------------
 
-if ( ! function_exists( "bonappetit_comments_list" ) ) :
+if ( ! function_exists( "cleanblog_comments_list" ) ) :
 
-    function bonappetit_comments_list( $comment, $args, $depth ) {
+    function cleanblog_comments_list( $comment, $args, $depth ) {
 
         $GLOBALS[ 'comment' ] = $comment;
         switch ( $comment->comment_type ) {
@@ -146,7 +147,7 @@ if ( ! function_exists( "bonappetit_comments_list" ) ) :
                 ?>
 
                 <li <?php comment_class(); ?> id="comment-<?php comment_ID(); ?>">
-                <p><?php esc_html_e( 'Pingback:', 'bonappetit' ); ?><?php comment_author_link(); ?><?php edit_comment_link( esc_html__( '(Edit)', 'bonappetit' ), '<span class="edit-link">', '</span>' ); ?></p>
+                <p><?php esc_html_e( 'Pingback:', 'cleanblog' ); ?><?php comment_author_link(); ?><?php edit_comment_link( esc_html__( '(Edit)', 'cleanblog' ), '<span class="edit-link">', '</span>' ); ?></p>
 
                 <?php
                 break;
@@ -159,8 +160,8 @@ if ( ! function_exists( "bonappetit_comments_list" ) ) :
                 <div id="comment-<?php comment_ID(); ?>" class="comment media">
                     <div class="comment-author clearfix">
                         <?php
-                        $get_avatar = get_avatar( $comment, apply_filters( 'bonappetit_post_comment_avatar_size', 80 ) );
-                        $avatar_img = bonappetit_get_avatar_url( $get_avatar );
+                        $get_avatar = get_avatar( $comment, apply_filters( 'cleanblog_post_comment_avatar_size', 80 ) );
+                        $avatar_img = cleanblog_get_avatar_url( $get_avatar );
                         //Comment author avatar
                         ?>
                         <div class="media-left">
@@ -175,7 +176,7 @@ if ( ! function_exists( "bonappetit_comments_list" ) ) :
                                     <span class="comment-time"><?php echo human_time_diff(get_comment_time('U'), current_time('timestamp')) . " " . __('ago');?></span>
                                     
                                 <span class="comment-meta"> 
-                                    <?php edit_comment_link( esc_html__( 'Edit', 'bonappetit' ), '<span class="edit-link">', '</span>' ); //edit link?>
+                                    <?php edit_comment_link( esc_html__( 'Edit', 'cleanblog' ), '<span class="edit-link">', '</span>' ); //edit link?>
                                 </span>
                                 </div>
                             </div>
@@ -190,7 +191,7 @@ if ( ! function_exists( "bonappetit_comments_list" ) ) :
                                     <li>
 
                                 <?php comment_reply_link( array_merge( $args, array(
-                                        'reply_text' => '<span class="fa fa-reply reply-icon">' . esc_html__( '', 'bonappetit' ) . '</span>',
+                                        'reply_text' => '<span class="fa fa-reply reply-icon">' . esc_html__( '', 'cleanblog' ) . '</span>',
                                         'depth'      => $depth,
                                         'max_depth'  => $args[ 'max_depth' ]
                                     ) ) ); ?>
@@ -225,9 +226,9 @@ endif;
 // Fetching Avatar URL
 //----------------------------------------------------------------------
 
-if ( ! function_exists( 'bonappetit_get_avatar_url' ) ) :
+if ( ! function_exists( 'cleanblog_get_avatar_url' ) ) :
 
-    function bonappetit_get_avatar_url( $get_avatar ) {
+    function cleanblog_get_avatar_url( $get_avatar ) {
         preg_match( "/src='(.*?)'/i", $get_avatar, $matches );
 
         return esc_url( $matches[ 1 ] );

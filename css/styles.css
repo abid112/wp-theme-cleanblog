@@ -419,4 +419,11 @@ body {
 .comments-title{
   text-align: center;
 }
+.input-field{
+  text-align: center;
+  width: 60%
+}
 
+.form-submit{
+  margin: 10px;
+}

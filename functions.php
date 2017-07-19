@@ -6,6 +6,8 @@ register_nav_menu('mainmenubar', 'Main Menu');
 register_nav_menu('footermen', 'footer Menu');
 add_theme_support('post-thumbnails');
 
+require_once('lib/ReduxCore/framework.php');
+require_once('lib/sample/cleanblog-config.php');
 //for comments section---------->
 require get_template_directory() . "/mail/template-tags.php";
 

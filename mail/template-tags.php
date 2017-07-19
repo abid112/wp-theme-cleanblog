@@ -111,6 +111,7 @@ if ( ! function_exists( 'cleanblog_comment_form' ) ) :
                         }
                        ?>
                        <br>
+                      
                          <div class="form-submit">
                             <input class="btn btn-primary btn-lg" name="submit" type="submit"
                                    id="<?php echo esc_attr( $args[ 'id_submit' ] ); ?>"
@@ -118,6 +119,7 @@ if ( ! function_exists( 'cleanblog_comment_form' ) ) :
                             <?php comment_id_fields( $post_id ); ?>
                         </div> 
                         <br>
+                        
                         <?php do_action( 'comment_form', $post_id ); ?>
                     </form>
                 <?php } ?>

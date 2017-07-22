@@ -9,12 +9,6 @@ $(function() {
     });
 });
 
-    jQuery(document).ready(function(){
-  jQuery(".test-slider").owlCarousel();
-});
-
-// Navigation Scripts to Show Header on Scroll-Up
-jQuery(document).ready(function($) {
 
 
 
@@ -43,14 +37,28 @@ jQuery(document).ready(function($) {
                     if (currentTop > headerHeight && !$('.navbar-custom').hasClass('is-fixed')) $('.navbar-custom').addClass('is-fixed');
                 }
                 this.previousTop = currentTop;
+
             });
     }
-
-
-
-
+$(document).ready(function() {
+ 
+  $("#owl-demo").owlCarousel({
+ 
+      navigation : true, // Show next and prev buttons
+      slideSpeed : 300,
+      paginationSpeed : 400,
+      singleItem:true
+ 
+      // "singleItem:true" is a shortcut for:
+      // items : 1, 
+      // itemsDesktop : false,
+      // itemsDesktopSmall : false,
+      // itemsTablet: false,
+      // itemsMobile : false
+ 
+  });
+ 
 });
-
 
 
 

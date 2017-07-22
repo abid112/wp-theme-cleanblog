@@ -17,12 +17,11 @@
 </header>
 
 <!-- Slide Show -->
-<div id="owl-demo" class="owl-theme">
+<div id="owl-demo" class="owl-theme test-slider">
  
-  <div class="item"><img src="<?php echo get_template_directory_uri(); ?>/img/home-bg.jpg" width="" height="" alt="" /></div>
-  <div class="item"><img src="assets/fullimage2.jpg" alt="GTA V"></div>
-  <div class="item"><img src="assets/fullimage3.jpg" alt="Mirror Edge"></div>
- 
+  <div class="item"><img src="<?php echo get_template_directory_uri(); ?>/img/home-bg.jpg" /></div>
+<div class="item"><img src="<?php echo get_template_directory_uri(); ?>/img/home-bg.jpg" /></div>
+<div class="item"><img src="<?php echo get_template_directory_uri(); ?>/img/home-bg.jpg" /></div>
 </div>
 
 

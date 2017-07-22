@@ -174,19 +174,19 @@
     // ADMIN BAR LINKS -> Setup custom links in the admin bar menu as external items.
     $args['admin_bar_links'][] = array(
         'id'    => 'redux-docs',
-        'href'  => 'http://docs.reduxframework.com/',
+        'href'  => '#',
         'title' => __( 'Documentation', 'redux-framework-demo' ),
     );
 
     $args['admin_bar_links'][] = array(
         //'id'    => 'redux-support',
-        'href'  => 'https://github.com/ReduxFramework/redux-framework/issues',
+        'href'  => '#',
         'title' => __( 'Support', 'redux-framework-demo' ),
     );
 
     $args['admin_bar_links'][] = array(
         'id'    => 'redux-extensions',
-        'href'  => 'reduxframework.com/extensions',
+        'href'  => '#',
         'title' => __( 'Extensions', 'redux-framework-demo' ),
     );
 

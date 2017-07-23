@@ -336,6 +336,170 @@ add_action( 'widgets_init', 'register_social_widget' );
 
 
 
+
+
+#Popular Post Custom Widget------------------------------------------------------------->
+
+
+
+class sparkling_popular_posts extends WP_Widget {
+
+    function __construct() {
+
+        $widget_ops = array('classname' => 'sparkling-popular-posts', 'description' => esc_html__("Popular Posts Widget", 'sparkling'));
+        parent::__construct('sparkling_popular_posts', esc_html__('Popular Posts Widget', 'sparkling'), $widget_ops);
+    }
+
+    function widget($args, $instance) {
+        extract($args);
+        $title = isset($instance['title']) ? $instance['title'] : esc_html__('Popular Posts', 'sparkling');
+        $limit = isset($instance['limit']) ? $instance['limit'] : 5;
+
+        echo $before_widget;
+        echo $before_title;
+        echo $title;
+        echo $after_title;
+
+        /**
+         * Widget Content
+         */
+        ?>
+
+        <!-- popular posts -->
+        <div class="popular-posts-wrapper">
+
+            <?php
+            query_posts(array(
+                'meta_key' => 'post_views_count',
+                'posts_per_page' => $limit,
+                'orderby' => 'meta_value_num',
+                'order' => 'DESC',
+            ));
+            if (have_posts()) : while (have_posts()) : the_post();
+                    ?>
+
+
+                    <?php if (get_the_content() != '') : ?>
+                        <!-- post -->
+                        <div class="post">
+
+                            <!-- image -->
+                            <div class="post-image <?php echo get_post_format(); ?>">
+
+                                <a href="<?php echo get_permalink(); ?>"><?php
+                        if (get_post_format() != 'quote') {
+                            
+                        }
+                        ?></a>
+
+                            </div> <!-- end post image -->
+
+                            <!-- content -->
+                            <div class="post-content">
+
+                                <a href="<?php echo get_permalink(); ?>"><?php echo trim(substr(get_the_title(), 0, 40)); ?></a>
+                               
+                                <div class="posts_style">
+                                    <span class="posts-date"><i class="fa fa-clock-o" aria-hidden="true"></i> <?php echo get_the_date('d M , Y'); ?> </span>
+                                </div>
+
+
+                                	<br>
+                            </div><!-- end content -->
+                        </div><!-- end post -->
+
+                    <?php endif; ?>
+
+                    <?php
+                endwhile;
+            endif;
+            wp_reset_query();
+            ?>
+
+
+
+
+        </div> <!-- end posts wrapper -->
+
+        <?php
+        echo $after_widget;
+    }
+
+    function form($instance) {
+
+        if (!isset($instance['title']))
+            $instance['title'] = esc_html__('Popular Posts', 'sparkling');
+        if (!isset($instance['limit']))
+            $instance['limit'] = 5;
+        ?>
+
+        <p><label for="<?php echo $this->get_field_id('title'); ?>"><?php esc_html_e('Title', 'sparkling') ?></label>
+
+            <input  type="text" value="<?php echo esc_attr($instance['title']); ?>"
+                    name="<?php echo $this->get_field_name('title'); ?>"
+                    id="<?php $this->get_field_id('title'); ?>"
+                    class="widefat" />
+        </p>
+
+        <p><label for="<?php echo $this->get_field_id('limit'); ?>"><?php esc_html_e('Limit Posts Number', 'sparkling') ?></label>
+
+            <input  type="text" value="<?php echo esc_attr($instance['limit']); ?>"
+                    name="<?php echo $this->get_field_name('limit'); ?>"
+                    id="<?php $this->get_field_id('limit'); ?>"
+                    class="widefat" />
+        <p>
+
+            <?php
+        }
+
+    }
+   
+
+    //post counter 
+function getPostViews($postID){
+    $count_key = 'post_views_count';
+    $count = get_post_meta($postID, $count_key, true);
+    if($count==''){
+        delete_post_meta($postID, $count_key);
+        add_post_meta($postID, $count_key, '0');
+        return "0";
+    }
+    return $count;
+}
+// popular post
+function setPostViews($postID) {
+    $count_key = 'post_views_count';
+    $count = get_post_meta($postID, $count_key, true);
+    if($count==''){
+        $count = 0;
+        delete_post_meta($postID, $count_key);
+        add_post_meta($postID, $count_key, '0');
+    }else{
+        $count++;
+        update_post_meta($postID, $count_key, $count);
+    }
+}
+
+    function register_sidebarwidget() { 
+	register_widget( 'sparkling_popular_posts' );
+}
+add_action( 'widgets_init', 'register_sidebarwidget' );
+
+
+
+
+     register_sidebar(array(
+    'id'            => 'sidebar-widget-1',
+    'name'          =>  esc_html__( 'Sidebar Widget', 'cleanblog' ),
+    'description'   =>  esc_html__( 'Used for popular post ', 'cleanblog' ),
+    'before_widget' => '<div id="%1$s" class="widget %2$s">',
+    'after_widget'  => '</div>',
+    'before_title'  => '<h3 class="widgettitle">',
+    'after_title'   => '</h3>',
+  ));
+
+
+
 #REMOVE REDUX DEMO TEXTS---------------------------------------------->
 
 function removeDemoModeLink() { // Be sure to rename this function to something more unique

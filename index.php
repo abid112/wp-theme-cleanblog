@@ -56,6 +56,18 @@
             </ul>
         </div>
 
+        <div class="col-md-4">
+
+        <div class="sidebarhp">
+
+        <?php dynamic_sidebar('sidebar-widget-1') ?>
+            
+
+        </div>
+            
+
+        </div>
+
     </div>
 </div>
 

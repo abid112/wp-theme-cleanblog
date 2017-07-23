@@ -17,19 +17,19 @@
 </header>
 
 <!-- Slide Show -->
-<div id="owl-demo" class="owl-theme test-slider">
+<!-- <div id="owl-demo" class="owl-theme test-slider">
  
   <div class="item"><img src="<?php echo get_template_directory_uri(); ?>/img/home-bg.jpg" /></div>
 <div class="item"><img src="<?php echo get_template_directory_uri(); ?>/img/home-bg.jpg" /></div>
 <div class="item"><img src="<?php echo get_template_directory_uri(); ?>/img/home-bg.jpg" /></div>
-</div>
+</div> -->
 
 
 
 <!-- Main Content -->
 <div class="container">
     <div class="row">
-        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="col-md-8">
 
             <div class="post-preview">
                 <?php while(have_posts() ) : the_post();  ?>
